@@ -9,7 +9,7 @@ import {
 } from "@/components/ui/dropdown-menu";
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
 import { cn } from "@/lib/utils";
-import { CircleUser, Menu, Package2 } from "lucide-react";
+import { CircleUser, Menu, Briefcase } from "lucide-react";
 import { NavLink, Outlet } from "react-router-dom";
 import { navItems } from "../App";
 
@@ -24,6 +24,7 @@ const Layout = () => {
       <main className="flex-grow p-4 overflow-auto">
         <Outlet />
       </main>
+      <Footer />
     </div>
   );
 };
@@ -34,8 +35,8 @@ const DesktopNav = () => (
       to="/"
       className="flex items-center gap-2 text-lg font-semibold md:text-base"
     >
-      <Package2 className="h-6 w-6" />
-      <span className="sr-only">Acme Inc</span>
+      <Briefcase className="h-6 w-6" />
+      <span className="sr-only">Job Finder</span>
     </NavItem>
     {navItems.map((item) => (
       <NavItem key={item.to} to={item.to}>
@@ -59,8 +60,8 @@ const MobileNav = () => (
           to="/"
           className="flex items-center gap-2 text-lg font-semibold"
         >
-          <Package2 className="h-6 w-6" />
-          <span className="sr-only">Acme Inc</span>
+          <Briefcase className="h-6 w-6" />
+          <span className="sr-only">Job Finder</span>
         </NavItem>
         {navItems.map((item) => (
           <NavItem key={item.to} to={item.to}>
@@ -83,10 +84,9 @@ const UserMenu = () => (
     <DropdownMenuContent align="end">
       <DropdownMenuLabel>My Account</DropdownMenuLabel>
       <DropdownMenuSeparator />
-      <DropdownMenuItem>Settings</DropdownMenuItem>
-      <DropdownMenuItem>Support</DropdownMenuItem>
-      <DropdownMenuSeparator />
-      <DropdownMenuItem>Logout</DropdownMenuItem>
+      <DropdownMenuItem>Login</DropdownMenuItem>
+      <DropdownMenuItem>Register</DropdownMenuItem>
+      <DropdownMenuItem>Profile</DropdownMenuItem>
     </DropdownMenuContent>
   </DropdownMenu>
 );
@@ -106,6 +106,22 @@ const NavItem = ({ to, children, className }) => (
   >
     {children}
   </NavLink>
+);
+
+const Footer = () => (
+  <footer className="border-t bg-background p-4 text-center">
+    <div className="flex justify-center space-x-4">
+      <NavLink to="/privacy-policy" className="text-muted-foreground hover:text-foreground">
+        Privacy Policy
+      </NavLink>
+      <NavLink to="/terms-of-service" className="text-muted-foreground hover:text-foreground">
+        Terms of Service
+      </NavLink>
+    </div>
+    <div className="mt-4">
+      <span className="text-muted-foreground">© 2023 Job Finder. All rights reserved.</span>
+    </div>
+  </footer>
 );
 
 export default Layout;
