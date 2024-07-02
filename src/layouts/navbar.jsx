@@ -38,6 +38,7 @@ const DesktopNav = () => (
       <Briefcase className="h-6 w-6" />
       <span className="sr-only">Job Finder</span>
     </NavItem>
+    <NavItem to="/post-job">Post a Job</NavItem>
     {navItems.map((item) => (
       <NavItem key={item.to} to={item.to}>
         {item.title}
@@ -63,6 +64,7 @@ const MobileNav = () => (
           <Briefcase className="h-6 w-6" />
           <span className="sr-only">Job Finder</span>
         </NavItem>
+        <NavItem to="/post-job">Post a Job</NavItem>
         {navItems.map((item) => (
           <NavItem key={item.to} to={item.to}>
             {item.title}

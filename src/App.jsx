@@ -7,6 +7,7 @@ import Layout from "./layouts/navbar"; // Use the navbar layout
 import Index from "./pages/Index.jsx";
 import JobListings from "./pages/JobListings.jsx";
 import JobDetails from "./pages/JobDetails.jsx";
+import JobPostForm from "./pages/JobPostForm.jsx";
 
 const queryClient = new QueryClient();
 
@@ -49,7 +50,7 @@ const App = () => {
               <Route index element={<Index />} />
               <Route path="jobs" element={<JobListings />} />
               <Route path="jobs/:id" element={<JobDetails />} />
-              {/* Add more routes here as needed */}
+              <Route path="post-job" element={<JobPostForm />} />
             </Route>
           </Routes>
         </Router>

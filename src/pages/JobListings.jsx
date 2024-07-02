@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { useQuery } from "@tanstack/react-query";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import {
@@ -11,56 +12,49 @@ import {
   PaginationPrevious,
 } from "@/components/ui/pagination";
 
+const fetchJobs = async () => {
+  // Replace with actual API call
+  return new Promise((resolve) => {
+    setTimeout(() => {
+      resolve([
+        { id: 1, title: "Job Listing 1", company: "Company 1", location: "Location 1" },
+        { id: 2, title: "Job Listing 2", company: "Company 2", location: "Location 2" },
+        { id: 3, title: "Job Listing 3", company: "Company 3", location: "Location 3" },
+      ]);
+    }, 1000);
+  });
+};
+
 const JobListings = () => {
-  const [filters, setFilters] = useState({
-    jobType: "",
-    location: "",
-    salaryRange: "",
+  const { data: jobs, isLoading, error } = useQuery({
+    queryKey: ["jobs"],
+    queryFn: fetchJobs,
   });
 
-  const handleFilterChange = (e) => {
-    const { name, value } = e.target;
-    setFilters((prevFilters) => ({
-      ...prevFilters,
-      [name]: value,
-    }));
-  };
+  if (isLoading) return <div>Loading...</div>;
+  if (error) return <div>Error loading jobs</div>;
+  
 
   return (
     <div className="space-y-8">
       <section className="space-y-4">
         <h1 className="text-3xl font-bold">Job Listings</h1>
         <div className="flex space-x-2">
-          <Input
-            type="text"
-            name="jobType"
-            placeholder="Job type"
-            value={filters.jobType}
-            onChange={handleFilterChange}
-          />
-          <Input
-            type="text"
-            name="location"
-            placeholder="Location"
-            value={filters.location}
-            onChange={handleFilterChange}
-          />
-          <Input
-            type="text"
-            name="salaryRange"
-            placeholder="Salary range"
-            value={filters.salaryRange}
-            onChange={handleFilterChange}
-          />
+          <Input type="text" name="jobType" placeholder="Job type" />
+          <Input type="text" name="location" placeholder="Location" />
+          <Input type="text" name="salaryRange" placeholder="Salary range" />
           <Button>Filter</Button>
         </div>
       </section>
       <section className="space-y-4">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-          {/* Placeholder for job listings */}
-          <div className="border p-4 rounded-lg">Job Listing 1</div>
-          <div className="border p-4 rounded-lg">Job Listing 2</div>
-          <div className="border p-4 rounded-lg">Job Listing 3</div>
+          {jobs.map((job) => (
+            <div key={job.id} className="border p-4 rounded-lg">
+              <h2 className="text-xl font-semibold">{job.title}</h2>
+              <p className="text-muted-foreground">{job.company}</p>
+              <p>{job.location}</p>
+            </div>
+          ))}
         </div>
       </section>
       <section className="flex justify-center">
