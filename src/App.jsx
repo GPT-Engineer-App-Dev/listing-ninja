@@ -8,6 +8,7 @@ import Index from "./pages/Index.jsx";
 import JobListings from "./pages/JobListings.jsx";
 import JobDetails from "./pages/JobDetails.jsx";
 import JobPostForm from "./pages/JobPostForm.jsx";
+import JobApplicationForm from "./pages/JobApplicationForm.jsx";
 
 const queryClient = new QueryClient();
 
@@ -51,6 +52,7 @@ const App = () => {
               <Route path="jobs" element={<JobListings />} />
               <Route path="jobs/:id" element={<JobDetails />} />
               <Route path="post-job" element={<JobPostForm />} />
+              <Route path="apply" element={<JobApplicationForm />} />
             </Route>
           </Routes>
         </Router>

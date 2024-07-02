@@ -1,6 +1,9 @@
 import { Button } from "@/components/ui/button";
+import { useNavigate } from "react-router-dom";
 
 const JobDetails = () => {
+  const navigate = useNavigate();
+
   return (
     <div className="space-y-8">
       <section className="space-y-4">
@@ -26,7 +29,9 @@ const JobDetails = () => {
         </ul>
       </section>
       <section className="space-y-4">
-        <Button variant="primary" size="lg">Apply Now</Button>
+        <Button variant="primary" size="lg" onClick={() => navigate("/apply")}>
+          Apply Now
+        </Button>
       </section>
     </div>
   );
